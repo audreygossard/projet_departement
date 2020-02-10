@@ -1,0 +1,147 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[T1]{fontenc}     
+\usepackage[utf8]{inputenc}   % Accents codés dans la fonte
+\usepackage[frenchb]{babel}  % Les traductions françaises
+\usepackage{numprint}          % \numprint(9,36) pour utilisation de la virgule comme séparateur décimal
+\usepackage{amsmath}         % Les maths de base
+
+\usepackage{graphicx}        % Gestion des inclusions graphiques
+\usepackage{pstricks-add}
+\usepackage{tikz}
+
+% Un raccourci pour composer les unités en caractères droits dans les formules mathématiques
+\newcommand{\U}[1]{~\mathrm{#1}}
+
+% Présentation de l'abstract pour la problématique
+\usepackage[runin]{abstract}
+
+% Un environnement pour la problématique
+\newenvironment{problematique}{
+\renewcommand{\abstractname}{Problématique}
+\begin{abstract}
+}{
+\end{abstract}
+}
+
+
+% Titre et auteurs du document
+\title{Rapport de projet département}
+\author{Cyril NEDERVEEN}
+\date{}
+
+
+\textheight=25cm
+\textwidth=19cm
+\topmargin=-27pt
+\hoffset=0.cm
+\oddsidemargin=-1.54cm
+\evensidemargin=-1.54cm
+\marginparwidth=0cm
+\marginparsep=0cm
+\headheight=0pt
+\headsep=0pt
+\parindent=0pt
+
+
+\begin{document}
+
+\maketitle
+
+\begin{problematique}
+
+\end{problematique}
+
+
+\section{Étude }
+
+Afin de mener à bien l'étude sur la (à changer) formations des patterns, il fut nécessaire de d'abord introduire la notion de solution d'équilibre et bifurcation.\\
+
+Nous rencontrerons principalement des problèmes d'équations différentielles du type :
+\begin{equation}
+\dfrac{\partial u}{\partial t}=f(u,\mu)
+\end{equation}
+où $u$ est une fonction de $R^d$ dépendant du temps et de l'espace, $f$ une fonction de $R^d \times R$ et $\mu$ un paramètre de l'équation différentielle. Notament une question que se pose est l'existence de solution ne dépendant pas du temps qu'on appelle solution d'équilibre. On les définit alors comme celles vérifiant $f(\overline{u},\mu)=0$. \\
+
+
+Une fois ces solutions d'équilibre trouvées, on veut savoir comment le système réagit lors d'une "perturbation", c'est à dire lorsqu'on se déplace légèrement d'un équilibre (au sens de la norme $R^d$). Deux cas se présentent : soit la solution ne reste relativement pas trop loin soit elle s'éloigne inconditionnellement de la solution d'équilibre initiale. On peut illustrer les deux cas avec le problème élémentaire : 
+
+\begin{equation}
+\dfrac{du}{dt}=\mu u
+\end{equation}
+
+Si on suppose $\mu$ non nul, alors l'unique solution d'équilibre est $0$. à présent on part de la condition initiale $u(0)=u_{0}>0$, alors, pour $\mu$ toujours non nul, la solution est $u(t)=u_{0}e^{\mu t}$. Donc si $\mu<0$, la solution converge vers la solution d'équilibre tandis que si $\mu>0$ la solution diverge totalement : 
+
+\begin{center}
+\setlength{\unitlength}{1.8cm}
+\begin{picture}(6,4)(-3,-2)
+\put(-2.5,0){\vector(1,0){5}}
+\put(2.7,-0.1){$\chi$}
+\put(0,-1.5){\vector(0,1){3}}
+\multiput(-2.5,1)(0.4,0){13}
+{\line(1,0){0.2}}
+\multiput(-2.5,-1)(0.4,0){13}
+{\line(1,0){0.2}}
+\put(0.2,1.4)
+{$\beta=v/c=\exp\chi$}
+\qbezier(0,0)(0.8853,0.8853)
+(2,0.9640)
+\qbezier(0,0)(-0.8853,-1.8853)
+(-2,-0.9640)
+\end{picture}
+\end{center}
+
+\section{Devoir}
+\begin{equation}
+\dfrac{\partial z}{\partial t}= 
+\end{equation}
+a,b fixés (tests num. b=1,3 et a=0,2)\\
+
+1.  - $\exists ? d_{crit}$ tel que $\forall d<d_{crit}, \forall\delta$, le système est stable.\\
+-Pour $d \geq  d_{crit}$, comment prédire les modes instables en fonction de $\delta$.\\
+
+2. résoudre (*) numériquement et vérifier ce qui a été trouvé en 1.\\
+
+
+Résolution numérique : le schéma d'Euler explicite est le suivant
+\begin{equation}
+c^{n+1}=c^n+ \delta t ( D \Delta c^n + f(c^n))
+\end{equation}
+utiliser zobero + Better bibtex pour la bibliographie latex. voir plus de détails sur le tuto KI
+
+
+
+
+
+
+\begin{figure}[h]
+\centering
+% Inclusion d'une image: ce qui est entre crochets est un argument "optionnel", alors que l'argument obligatoire est entre accolades
+\includegraphics[width=7cm]{code}
+\caption{Bloc d'itération 
+         \label{fig:exemple}}
+\end{figure}
+\begin{equation}
+f=4,75 cm
+\end{equation}
+\begin{figure}[h]
+\centering
+% Inclusion d'une image: ce qui est entre crochets est un argument "optionnel", alors que l'argument obligatoire est entre accolades
+\includegraphics[width=15cm]{simulation}
+\caption{Déformée de la tôle 
+         \label{fig:exemple}}
+\end{figure}
+\\
+\\
+\\
+\\
+\\
+\\
+\\
+\\
+\section{Conclusion}
+En reprenant le résultat établi en première partie avec les caractéristiques géométriques et de matériaux i.e. $e=0.5mm$, $L=836mm$, $ E=205000\;MPa,\;\upsilon = 0.3\;et\;\rho=7800\;Kg/m^{3}$, on obtient pour la plaque d’acier uniforme une flèche de :
+\begin{equation}
+f=2,28 cm
+\end{equation}\\
+
+\end{document}

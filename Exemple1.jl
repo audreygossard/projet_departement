@@ -1,10 +1,10 @@
-using Plots
+using PyPlot
 
 h=0.01
 N=10000
 L=h*N
 
-mu  = 5
+mu  = 3
 mu1 = 5
 mu2 = 5
 mu3 = 5
@@ -34,8 +34,8 @@ U2[1]=0.01   #solution pour mu = +2 donc instable
 U3[1]=1.01   #solution pour mu = +2 donc stable
 U4[1]=-1.01  #solution pour mu = -(+ pour f2)1 donc instable
 
-X[1]=1.
-DX[1]=1.
+X[1]=.1
+DX[1]=.1
 
 X1[1]=-1.
 DX1[1]=1.
@@ -71,18 +71,16 @@ for k = 1:(N-1)
     X[k+1]=X[k]+h*f3(X[k],DX[k],mu)[1]
     DX[k+1]=DX[k]+h*f3(X[k+1],DX[k],mu)[2]
 
-    X1[k+1]=X1[k]+h*f3(X1[k],DX1[k],mu1)[1]
-    DX1[k+1]=DX1[k]+h*f3(X1[k+1],DX1[k],mu1)[2]
-
-    X2[k+1]=X2[k]+h*f3(X2[k],DX2[k],mu2)[1]
-    DX2[k+1]=DX2[k]+h*f3(X2[k+1],DX2[k],mu2)[2]
-
-    X3[k+1]=X3[k]+h*f3(X3[k],DX3[k],mu3)[1]
-    DX3[k+1]=DX3[k]+h*f3(X3[k+1],DX3[k],mu3)[2]
+    # X1[k+1]=X1[k]+h*f3(X1[k],DX1[k],mu1)[1]
+    # DX1[k+1]=DX1[k]+h*f3(X1[k+1],DX1[k],mu1)[2]
+    #
+    # X2[k+1]=X2[k]+h*f3(X2[k],DX2[k],mu2)[1]
+    # DX2[k+1]=DX2[k]+h*f3(X2[k+1],DX2[k],mu2)[2]
+    #
+    # X3[k+1]=X3[k]+h*f3(X3[k],DX3[k],mu3)[1]
+    # DX3[k+1]=DX3[k]+h*f3(X3[k+1],DX3[k],mu3)[2]
 
 end
-
-gr()
 
 # p1=plot(T,U1,label = "u1")
 # p2=plot(T,U2,label = "u2")
@@ -90,7 +88,7 @@ gr()
 # p4=plot(T,U4,label = "u4")
 
 p1=plot(X,DX,label = "dx/dt(x)")
-p2=plot(X1,DX1,label = "dx/dt(x)")
-p3=plot(X2,DX2,label = "dx/dt(x)")
-p4=plot(X3,DX3,label = "dx/dt(x)")
-plot(p1,p2,p3,p4, layout =(2,2))
+#p2=plot(X1,DX1,label = "dx/dt(x)")
+#p3=plot(X2,DX2,label = "dx/dt(x)")
+#p4=plot(X3,DX3,label = "dx/dt(x)")
+plot(p1)
