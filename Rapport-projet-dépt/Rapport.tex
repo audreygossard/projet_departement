@@ -91,9 +91,36 @@ Si on suppose $\mu$ non nul, alors l'unique solution d'équilibre est $0$. à pr
 \end{center}
 
 \section{Devoir}
+\begin{align*}
+\dfrac{\partial z}{\partial t}= D \Delta z + df(c^*) \\
+\Delta \omega=\lambda \omega \\
+\dfrac{\partial \omega}{\partial t}= (D \lambda + df(c^*))\omega
+\end{align*}
+
+avec $\omega$ définit par : 
 \begin{equation}
-\dfrac{\partial z}{\partial t}= 
+\omega (x) = \sum_{n=0}^{\infty} c_{n}(\omega)e_{n}(x)
 \end{equation}
+où $e_{n}(x)=cos(n \pi x)$
+\begin{equation}
+z(x,t)= \sum_{n=0}^{\infty} s_{n}(t) e_{n}(x)
+\end{equation}
+Les $e_n$ vérifiant : $\Delta e_n = -n^2 \pi ^2 e_n$
+\begin{align*}
+\forall n, \dfrac{d s_n}{dt}= -(n^2 \pi^2) D s_n (t) + df(c^*)s_n (t) \\
+=(df(c^*) - n^2 \pi ^2 D)s_n (t)\\
+=B_n s_n (t)
+\end{align*}
+
+conditions de stabilité 2D : 
+\[\left
+\{\begin{array}{rcr}tr(B_n) & < & 0 \\
+det(B_n) & > & 0 \\
+\end{array}
+\right.\]\\
+
+
+
 a,b fixés (tests num. b=1,3 et a=0,2)\\
 
 1.  - $\exists ? d_{crit}$ tel que $\forall d<d_{crit}, \forall\delta$, le système est stable.\\
@@ -120,28 +147,4 @@ utiliser zobero + Better bibtex pour la bibliographie latex. voir plus de détai
 \caption{Bloc d'itération 
          \label{fig:exemple}}
 \end{figure}
-\begin{equation}
-f=4,75 cm
-\end{equation}
-\begin{figure}[h]
-\centering
-% Inclusion d'une image: ce qui est entre crochets est un argument "optionnel", alors que l'argument obligatoire est entre accolades
-\includegraphics[width=15cm]{simulation}
-\caption{Déformée de la tôle 
-         \label{fig:exemple}}
-\end{figure}
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\section{Conclusion}
-En reprenant le résultat établi en première partie avec les caractéristiques géométriques et de matériaux i.e. $e=0.5mm$, $L=836mm$, $ E=205000\;MPa,\;\upsilon = 0.3\;et\;\rho=7800\;Kg/m^{3}$, on obtient pour la plaque d’acier uniforme une flèche de :
-\begin{equation}
-f=2,28 cm
-\end{equation}\\
-
 \end{document}
