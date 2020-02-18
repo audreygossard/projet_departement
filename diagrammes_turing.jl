@@ -40,9 +40,10 @@ function diagramme_turing(d1,d2,d_nb,delta1,delta2,delta_nb,n1,n2)
                 end
             end
         end
-        lab = string("Stable ", n)
+        lab = string("Stable pour n = ", n)
+        print(lab)
         #axs[n+1].plot(d_stables,delta_stables, label=lab)
-        plot(d_stables,delta_stables, label=lab, alpha = 0.2, marker = "s", linestyle = "None")
+        plot(d_stables,delta_stables, alpha = 0.15, marker = "s", linestyle = "None")
         legend(lab)
     end
     xlabel("d")
@@ -52,4 +53,4 @@ function diagramme_turing(d1,d2,d_nb,delta1,delta2,delta_nb,n1,n2)
 end
 
 
-diagramme_turing(d_crit/100,d_crit*10,1000,0.01,100,1000,0,2)
+diagramme_turing(d_crit/100,d_crit*10,120,0.01,100,120,0,2)
