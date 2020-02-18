@@ -23,7 +23,8 @@ end
 couleurs = ['b','g','r','c','m','y']
 
 function diagramme_turing(d1,d2,d_nb,delta1,delta2,delta_nb,n1,n2)
-    fig,axs = subplots(1, n2-n1+1, sharey = true)
+    #fig,axs = subplots(1, n2-n1+1, sharey = true)
+    figure()
     list_d = range(d1,stop=d2,length = d_nb)
     list_delta = range(delta1,stop=delta2, length = delta_nb)
     for n = n1:n2
@@ -39,11 +40,16 @@ function diagramme_turing(d1,d2,d_nb,delta1,delta2,delta_nb,n1,n2)
                 end
             end
         end
-
-        axs[n+1].plot(d_stables,delta_stables)
+        lab = string("Stable ", n)
+        #axs[n+1].plot(d_stables,delta_stables, label=lab)
+        plot(d_stables,delta_stables, label=lab, alpha = 0.2, marker = "s", linestyle = "None")
+        legend(lab)
     end
-    show()
+    xlabel("d")
+    ylabel("delta")
+    savefig("diagrammes_turing.png", dpi = 300)
+    show() #ne fonctionne pas! :'(
 end
 
 
-diagramme_turing(d_crit/100,d_crit*10,100,0.01,100,100,0,2)
+diagramme_turing(d_crit/100,d_crit*10,1000,0.01,100,1000,0,2)
