@@ -60,7 +60,6 @@ X[2] = 2
 X[3] = 3
 X[4] = 4
 
-println(X)
 
 ux1 = zeros(N)
 ux2 = zeros(N)
