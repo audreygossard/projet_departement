@@ -41,16 +41,15 @@ function diagramme_turing(d1,d2,d_nb,delta1,delta2,delta_nb,n1,n2)
             end
         end
         lab = string("Stable pour n = ", n)
-        print(lab)
-        #axs[n+1].plot(d_stables,delta_stables, label=lab)
-        plt.plot(d_stables,delta_stables, alpha = 0.15, marker = "s", linestyle = "None")
-        legend(lab)
+        println(lab)
+        plt.plot(d_stables,delta_stables, alpha = 0.15, marker = "s", linestyle = "None", label = lab)
     end
     xlabel("d")
     ylabel("delta")
+    legend()
     plt.savefig("diagrammes_turing.png", dpi = 300)
     show() #ne fonctionne pas! :'(
 end
 
 
-diagramme_turing(d_crit/100,d_crit*10,120,0.01,100,120,0,2)
+diagramme_turing(d_crit/100,d_crit*10,120,0.00005,500,120,0,5)
