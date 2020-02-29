@@ -1,4 +1,5 @@
 using Plots
+using PyPlot
 
 # Données du problème
 a = 0.2
@@ -6,7 +7,7 @@ b = 1.3
 delta = 5
 d = 5
 
-Nx = 30
+Nx = 100
 dt = 0.01
 Nt = 100
 
@@ -17,11 +18,8 @@ c1 = zeros(2 * Nx)    #variable pour explicite
 c2 = zeros(2 * Nx)
 X=0:1/Nx:1-1/Nx
 
+
 for x = 1:Nx  # initialisation de c
-<<<<<<< HEAD
-    c1[x] = a+b+rand()*10^-4
-    c1[x+Nx] = b/((a+b)^2)+rand()*10^-4
-=======
     c1[x] = a+b +rand()*10^-4
     c1[x+Nx] = b/((a+b)^2) +rand()*10^-4
     c2[x]=c1[x]
@@ -30,7 +28,6 @@ for x = 1:Nx  # initialisation de c
     stock1[1,x+Nx]=c1[x+Nx]
     stock2[1,x]=c1[x]
     stock2[1,x+Nx]=c1[x+Nx]
->>>>>>> 1c48a29f3f0c57392cf523751916bd87cfdbc63b
 end
 
 #c2=c1         #variable pour implicite
@@ -79,10 +76,11 @@ function f(c)
 end
 
 for t = 1:Nt-1   #Incrémentation de c
+    E = inv(I-dt*M)*(c2+dt*delta*f(c2))
     for x = 1:2*Nx
         #stock1[t+1,x] = c1[x] + dt * ((M * c1)[x] + delta*f(c1)[x]) #explicite
         stock1[t+1,x]=0
-        stock2[t+1,x] = (inv(I-dt*M)*(c2+dt*delta*f(c2)))[x] #implicite
+        stock2[t+1,x] = E[x] #implicite
         c1[x]=stock1[t,x]
         c2[x]=stock2[t,x]
     end
@@ -98,9 +96,39 @@ print("end")
 
 plotly()
 
-p1=plot(X,u1,label="u schéma explicite")
-p2=plot(X,u2,label="u schéma implicite")
-p3=plot(X,v1,label="v schéma explicite")
-p4=plot(X,v2,label="v schéma implicite")
+p1=Plots.plot(X,u1,label="u schéma explicite")
+p2=Plots.plot(X,u2,label="u schéma implicite")
+p3=Plots.plot(X,v1,label="v schéma explicite")
+p4=Plots.plot(X,v2,label="v schéma implicite")
 
-plot(p1,p2,p3,p4,layout=(2,2))
+Plots.plot(p1,p2,p3,p4,layout=(2,2))
+
+
+
+# ---- Affichage 3D -----
+
+fig = plt.figure()
+ax_u = fig.add_subplot(111, projection="3d")
+ax_v = fig.add_subplot(111, projection="3d")
+
+dx = 1/Nx
+X = [i*dx for i = 1:Nx]
+T = [i*dt for i = 1:Nt]
+
+
+u = zeros((Nt,Nx))
+v = zeros((Nt,Nx))
+for t = 1:Nt
+    for x = 1:Nx
+        u[t,x] = stock2[t,x]
+        v[t,x] = stock2[t,x+Nx]
+    end
+end
+
+Plots.plot(T,X,u) # fonctionne pas??
+
+ax_u.plot_wireframe(T, X, u, rstride=10, cstride=10)
+plt.savefig("affichage_3D_u", dpi = 300)
+
+ax_v.plot_wireframe(T, X, u, rstride=10, cstride=10)
+plt.savefig("affichage_3D_v", dpi = 300)
