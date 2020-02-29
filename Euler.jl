@@ -96,6 +96,7 @@ print("end")
 
 plotly()
 
+
 p1=Plots.plot(X,u1,label="u schéma explicite")
 p2=Plots.plot(X,u2,label="u schéma implicite")
 p3=Plots.plot(X,v1,label="v schéma explicite")
