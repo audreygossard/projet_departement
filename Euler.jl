@@ -98,9 +98,9 @@ print("end")
 
 plotly()
 
-p1=plot(X,u1,label="u schéma explicite")
-p2=plot(X,u2,label="u schéma implicite")
-p3=plot(X,v1,label="v schéma explicite")
-p4=plot(X,v2,label="v schéma implicite")
+p1=plot(X,u1,label="u schéma explicite", color = "red")
+p2=plot(X,u2,label="u schéma implicite", color = "blue")
+p3=plot(X,v1,label="v schéma explicite", color = "orange")
+p4=plot(X,v2,label="v schéma implicite", color = "green")
 
 plot(p1,p2,p3,p4,layout=(2,2))
