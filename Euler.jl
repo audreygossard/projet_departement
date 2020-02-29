@@ -4,26 +4,38 @@ using Plots
 a = 0.2
 b = 1.3
 delta = 5
-d = 1
+d = 5
 
 Nx = 30
-dt = 0.05
-T = 5
-Nt = 50 # T/dt
+dt = 0.01
+Nt = 100
 
-stock = zeros(Nt, 2 * Nx)  # tableau pour stocker tous les c
+stock1 = zeros(Nt, 2 * Nx)  # tableau pour stocker tous les c
+stock2 = zeros(Nt, 2 * Nx)
 
 c1 = zeros(2 * Nx)    #variable pour explicite
+c2 = zeros(2 * Nx)
 X=0:1/Nx:1-1/Nx
 
 for x = 1:Nx  # initialisation de c
-    c1[x] = a+b+(rand()*2-1)*10^-4
-    c1[x+Nx] = b/((a+b)^2)+(rand()*2-1)*10^-4
+<<<<<<< HEAD
+    c1[x] = a+b+rand()*10^-4
+    c1[x+Nx] = b/((a+b)^2)+rand()*10^-4
+=======
+    c1[x] = a+b +rand()*10^-4
+    c1[x+Nx] = b/((a+b)^2) +rand()*10^-4
+    c2[x]=c1[x]
+    c2[x+Nx]=c1[x+Nx]
+    stock1[1,x]=c1[x]
+    stock1[1,x+Nx]=c1[x+Nx]
+    stock2[1,x]=c1[x]
+    stock2[1,x+Nx]=c1[x+Nx]
+>>>>>>> 1c48a29f3f0c57392cf523751916bd87cfdbc63b
 end
 
-c2=c1         #variable pour implicite
-cmod1 = c1    #variable auxiliaire pour l'incrémentation
-comd2 = c2
+#c2=c1         #variable pour implicite
+#cmod1 = c1    #variable auxiliaire pour l'incrémentation
+#comd2 = c2
 
 D = zeros(2 * Nx, 2 * Nx)  #matrice de diffusion
 A = zeros(2 * Nx, 2 * Nx)  #matrice de l'opérateur laplacien
@@ -66,25 +78,29 @@ function f(c)
     return L
 end
 
-for t = 1:Nt   #Incrémentation de c
-    cmod1 = c1 + dt * (M * c1 + delta*f(c1)) #explicite
-    cmod2 = inv(I-dt*M)*(c2+dt*f(c2)) #implicite
-    for x =1:2*Nx
-        c1[x]=cmod1[x]
-        c2[x]=cmod2[x]
+for t = 1:Nt-1   #Incrémentation de c
+    for x = 1:2*Nx
+        #stock1[t+1,x] = c1[x] + dt * ((M * c1)[x] + delta*f(c1)[x]) #explicite
+        stock1[t+1,x]=0
+        stock2[t+1,x] = (inv(I-dt*M)*(c2+dt*delta*f(c2)))[x] #implicite
+        c1[x]=stock1[t,x]
+        c2[x]=stock2[t,x]
     end
-    #println(c1[1:Nx])
 end
 
 #ploting
-u=c2[1:Nx]
-v=c1[1:Nx]
+u1=c1[1:Nx]
+u2=c2[1:Nx]
+v1=c1[Nx+1:2*Nx]
+v2=c2[Nx+1:2*Nx]
+
+print("end")
 
 plotly()
 
-p1=plot(X,u,ylims=(0.,2.))
-p2=plot(X,v,ylims=(0.,2.))
+p1=plot(X,u1,label="u schéma explicite")
+p2=plot(X,u2,label="u schéma implicite")
+p3=plot(X,v1,label="v schéma explicite")
+p4=plot(X,v2,label="v schéma implicite")
 
-plot(p1,p2,layout=(2,1))
-
-print("end")
+plot(p1,p2,p3,p4,layout=(2,2))
