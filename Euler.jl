@@ -17,8 +17,8 @@ c1 = zeros(2 * Nx)    #variable pour explicite
 X=0:1/Nx:1-1/Nx
 
 for x = 1:Nx  # initialisation de c
-    c1[x] = a+b+rand()*10^-4
-    c1[x+Nx] = b/((a+b)^2)+rand()*10^-4
+    c1[x] = a+b+(rand()*2-1)*10^-4
+    c1[x+Nx] = b/((a+b)^2)+(rand()*2-1)*10^-4
 end
 
 c2=c1         #variable pour implicite
