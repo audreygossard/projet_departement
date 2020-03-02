@@ -13,7 +13,6 @@ Nt = 5000
 stock = zeros(Nt, 2 * Nx)  # tableau pour stocker tous les c
 
 c = zeros(2 * Nx)    #variable pour implicite
-X=0:1/Nx:1-1/Nx
 
 r = randn(2*Nx)
 o = ones(Nx)
@@ -76,7 +75,7 @@ end
 
 B = inv(I-dt*M)
 for t = 1:Nt-1   #Incrémentation de c
-    E = B*(c2+dt*delta*f(c2))
+    E = B*(c+dt*delta*f(c))
     stock[t+1,:] = E[:]
     c[:] = stock[t,:]
 end
@@ -98,5 +97,8 @@ v = copy(stock[:,Nx+1:end])
 
 surf(T, X, u', rstride=10, cstride=10)
 surf(T, X, v', rstride=10, cstride=10)
+xlabel("temps")
+ylabel("espace")
+zlabel("concentrations")
 plt.show()
 plt.savefig("affichage_3D_u", dpi = 300)
