@@ -10,31 +10,19 @@ Nx = 30
 dt = 0.001
 Nt = 5000
 
-stock1 = zeros(Nt, 2 * Nx)  # tableau pour stocker tous les c
-stock2 = zeros(Nt, 2 * Nx)
+stock = zeros(Nt, 2 * Nx)  # tableau pour stocker tous les c
 
-c1 = zeros(2 * Nx)    #variable pour explicite
-c2 = zeros(2 * Nx)
+c = zeros(2 * Nx)    #variable pour implicite
 X=0:1/Nx:1-1/Nx
 
+r = randn(2*Nx)
+o = ones(Nx)
+c[1:Nx] = (a+b)*o +(r[1:Nx]*2-o)*10^-4
+c[Nx+1:end] = b/((a+b)^2)*o +(r[Nx+1:end]*2-o)*10^-4
+stock[1,1:Nx] = c[1:Nx]
+stock[1,1+Nx:end] = c[Nx+1:end]
 
-for x = 1:Nx  # initialisation de c
-    c1[x] = a+b +(rand()*2-1)*10^-4
-    c1[x+Nx] = b/((a+b)^2) +(rand()*2-1)*10^-4
-    c2[x]=c1[x]
-    c2[x+Nx]=c1[x+Nx]
-    stock1[1,x]=c1[x]
-    stock1[1,x+Nx]=c1[x+Nx]
-    stock2[1,x]=c1[x]
-    stock2[1,x+Nx]=c1[x+Nx]
-end
-
-u01 = copy(c1)
-u02 = copy(c2)
-
-#c2=c1         #variable pour implicite
-#cmod1 = c1    #variable auxiliaire pour l'incrémentation
-#comd2 = c2
+c0 = copy(c)
 
 D = zeros(2 * Nx, 2 * Nx)  #matrice de diffusion
 A = zeros(2 * Nx, 2 * Nx)  #matrice de l'opérateur laplacien
@@ -68,6 +56,14 @@ A = Nx^2 * A
 
 M=D*A
 
+# comment faire pour le carre? c[1:Nx]*c[1:Nx]?????
+# function f(c)
+#     L = zeros(2*Nx)
+#     L[1:Nx] = a*o - c[1:Nx] + c[1+Nx:end] * c[1:Nx]*c[1:Nx]
+#     L[1+Nx:end] = b*o - c[1+Nx:end] * c[1:Nx]*c[1:Nx]
+#     return L
+# end
+
 function f(c)
     L = zeros(2 * Nx)
     for x = 1:Nx
@@ -77,33 +73,13 @@ function f(c)
     return L
 end
 
+
+B = inv(I-dt*M)
 for t = 1:Nt-1   #Incrémentation de c
-    E = inv(I-dt*M)*(c2+dt*delta*f(c2))
-    for x = 1:2*Nx
-        #stock1[t+1,x] = c1[x] + dt * ((M * c1)[x] + delta*f(c1)[x]) #explicite
-        stock1[t+1,x]=0
-        stock2[t+1,x] = E[x] #implicite
-        c1[x]=stock1[t,x]
-        c2[x]=stock2[t,x]
-    end
+    E = B*(c2+dt*delta*f(c2))
+    stock[t+1,:] = E[:]
+    c[:] = stock[t,:]
 end
-
-#ploting
-u1=c1[1:Nx]
-u2=c2[1:Nx]
-v1=c1[Nx+1:2*Nx]
-v2=c2[Nx+1:2*Nx]
-
-print("end")
-
-
-#p1=Plots.plot(X,u1,label="u schéma explicite")
-#p2=Plots.plot(X,u2,label="u schéma implicite")
-#p3=Plots.plot(X,v1,label="v schéma explicite")
-#p4=Plots.plot(X,v2,label="v schéma implicite")
-
-#Plots.plot(p1,p2,p3,p4,layout=(2,2))
-
 
 
 # ---- Affichage 3D -----
@@ -116,22 +92,11 @@ X = [i*dx for i = 1:Nx]
 T = [i*dt for i = 1:Nt]
 
 
-u = zeros((Nt,Nx))
-v = zeros((Nt,Nx))
-for t = 1:Nt
-    for x = 1:Nx
-        u[t,x] = stock2[t,x]
-        v[t,x] = stock2[t,x+Nx]
-    end
-end
+u = copy(stock[:,1:Nx])
+v = copy(stock[:,Nx+1:end])
 
-
-#Plots.plot(T,X,u) # fonctionne pas??
 
 surf(T, X, u', rstride=10, cstride=10)
 surf(T, X, v', rstride=10, cstride=10)
 plt.show()
 plt.savefig("affichage_3D_u", dpi = 300)
-
-#ax_v.plot_wireframe(T, X, u, rstride=10, cstride=10)
-#plt.savefig("affichage_3D_v", dpi = 300)
