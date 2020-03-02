@@ -1,15 +1,14 @@
-using Plots
 using PyPlot
 
 # Données du problème
 a = 0.2
 b = 1.3
-delta = 5
-d = 5
+delta = 175
+d = 35
 
-Nx = 100
-dt = 0.01
-Nt = 100
+Nx = 30
+dt = 0.001
+Nt = 5000
 
 stock1 = zeros(Nt, 2 * Nx)  # tableau pour stocker tous les c
 stock2 = zeros(Nt, 2 * Nx)
@@ -20,8 +19,8 @@ X=0:1/Nx:1-1/Nx
 
 
 for x = 1:Nx  # initialisation de c
-    c1[x] = a+b +rand()*10^-4
-    c1[x+Nx] = b/((a+b)^2) +rand()*10^-4
+    c1[x] = a+b +(rand()*2-1)*10^-4
+    c1[x+Nx] = b/((a+b)^2) +(rand()*2-1)*10^-4
     c2[x]=c1[x]
     c2[x+Nx]=c1[x+Nx]
     stock1[1,x]=c1[x]
@@ -29,6 +28,9 @@ for x = 1:Nx  # initialisation de c
     stock2[1,x]=c1[x]
     stock2[1,x+Nx]=c1[x+Nx]
 end
+
+u01 = copy(c1)
+u02 = copy(c2)
 
 #c2=c1         #variable pour implicite
 #cmod1 = c1    #variable auxiliaire pour l'incrémentation
@@ -94,23 +96,20 @@ v2=c2[Nx+1:2*Nx]
 
 print("end")
 
-plotly()
 
+#p1=Plots.plot(X,u1,label="u schéma explicite")
+#p2=Plots.plot(X,u2,label="u schéma implicite")
+#p3=Plots.plot(X,v1,label="v schéma explicite")
+#p4=Plots.plot(X,v2,label="v schéma implicite")
 
-p1=Plots.plot(X,u1,label="u schéma explicite")
-p2=Plots.plot(X,u2,label="u schéma implicite")
-p3=Plots.plot(X,v1,label="v schéma explicite")
-p4=Plots.plot(X,v2,label="v schéma implicite")
-
-Plots.plot(p1,p2,p3,p4,layout=(2,2))
+#Plots.plot(p1,p2,p3,p4,layout=(2,2))
 
 
 
 # ---- Affichage 3D -----
 
-fig = plt.figure()
-ax_u = fig.add_subplot(111, projection="3d")
-ax_v = fig.add_subplot(111, projection="3d")
+#PyPlot.use("tkagg")
+figure()
 
 dx = 1/Nx
 X = [i*dx for i = 1:Nx]
@@ -126,10 +125,13 @@ for t = 1:Nt
     end
 end
 
-Plots.plot(T,X,u) # fonctionne pas??
 
-ax_u.plot_wireframe(T, X, u, rstride=10, cstride=10)
+#Plots.plot(T,X,u) # fonctionne pas??
+
+surf(T, X, u', rstride=10, cstride=10)
+surf(T, X, v', rstride=10, cstride=10)
+plt.show()
 plt.savefig("affichage_3D_u", dpi = 300)
 
-ax_v.plot_wireframe(T, X, u, rstride=10, cstride=10)
-plt.savefig("affichage_3D_v", dpi = 300)
+#ax_v.plot_wireframe(T, X, u, rstride=10, cstride=10)
+#plt.savefig("affichage_3D_v", dpi = 300)
