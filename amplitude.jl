@@ -4,9 +4,9 @@ using Plots
 a = 0.2
 b = 1.3
 delta = 175
-dcrit = 20.002
+dcrit = 24.6
 
-heps = 0.001
+heps = 0.01
 d = dcrit
 
 ueq = a+b
@@ -14,7 +14,7 @@ veq = b/((a+b)^2)
 
 Nx = 30
 dt = 0.001
-Nt = 3000
+Nt = 20000
 Neps = 100
 
 A = zeros(2 * Nx, 2 * Nx)  #matrice de l'opérateur laplacien
@@ -103,11 +103,7 @@ for i=1:Neps
     ampl_u[i] = maximum(u)#amplitude maximum
     ampl_v[i] = maximum(v)
 end
-plot(eps, ampl_u)
-# surf(T, X, u', rstride=10, cstride=10)
-# surf(T, X, v', rstride=10, cstride=10)
-# xlabel("temps")
-# ylabel("espace")
-# zlabel("concentrations")
-# plt.show()
-# plt.savefig("affichage_3D_u", dpi = 300)
+p1 = plot(eps, ampl_u, xlabel = "epsilon", ylabel= "amplitude u")
+p2 = plot(eps, ampl_v, xlabel = "epsilon", ylabel= "amplitude v")
+
+plot(p1,p2, layout = (1,2))
