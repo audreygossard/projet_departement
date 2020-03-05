@@ -5,8 +5,6 @@ a = 0.2
 b = 1.3
 delta = 175
 dcrit = 24.6
-
-heps = 0.01
 d = dcrit
 
 ueq = a+b
@@ -15,7 +13,8 @@ veq = b/((a+b)^2)
 Nx = 30
 dt = 0.001
 Nt = 20000
-Neps = 100
+heps = 0.01
+Neps = 10
 
 A = zeros(2 * Nx, 2 * Nx)  #matrice de l'opérateur laplacien
 I = zeros(2 * Nx, 2 * Nx)   #matrice identié
@@ -103,7 +102,12 @@ for i=1:Neps
     ampl_u[i] = maximum(u)#amplitude maximum
     ampl_v[i] = maximum(v)
 end
+eps2 = zeros(Neps)
+for j=1:Neps
+    eps2[j] = sqrt(eps[j])
+end
 p1 = plot(eps, ampl_u, xlabel = "epsilon", ylabel= "amplitude u")
 p2 = plot(eps, ampl_v, xlabel = "epsilon", ylabel= "amplitude v")
-
-plot(p1,p2, layout = (1,2))
+p3 = plot(eps2, ampl_u, xlabel = "sqrt(epsilon)", ylabel= "amplitude u")
+p4 = plot(eps2, ampl_v, xlabel = "sqrt(epsilon)", ylabel= "amplitude v")
+plot(p1,p2,p3,p4, layout=(2,2))
