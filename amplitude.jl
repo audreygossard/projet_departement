@@ -3,8 +3,8 @@ using Plots
 # Données du problème
 a = 0.2
 b = 1.3
-delta = 175
-dcrit = 24.6
+delta = 125
+dcrit = 22.56
 d = dcrit
 
 ueq = a+b
@@ -12,9 +12,9 @@ veq = b/((a+b)^2)
 
 Nx = 30
 dt = 0.001
-Nt = 20000
-heps = 0.01
-Neps = 10
+Nt = 100 000
+heps = 0.005
+Neps = 20
 
 A = zeros(2 * Nx, 2 * Nx)  #matrice de l'opérateur laplacien
 I = zeros(2 * Nx, 2 * Nx)   #matrice identié
@@ -72,7 +72,7 @@ for i=1:Neps
     #Remplissage de D
     for i = 1:2*Nx
         D[i, i] = 1
-        if (i >= Nx)
+        if (i > Nx)
             D[i, i] = d
         end
     end
