@@ -1,0 +1,11 @@
+graphique1 : delta=130, dcrit=22.7, heps = 0.001, dt = e-3, Nt=50000, Neps = 100
+graphique2 : delta = 110 dcrit=22.95 idem
+graphique 3 : delta =125, drcit=22.6, heps= 0.005, dt idem, Nt = 100 000, Neps=50
+
+graphique 4 : delta =125, drcit=22.55, heps= 0.005, dt idem, Nt = 100 000, Neps=10
+graphique 5 : delta =125, drcit=22.56, heps= 0.005, dt idem, Nt = 100 000, Neps=50
+graphique 6 : delta =125, drcit=22.51, heps= 0.005, dt idem, Nt = 100 000, Neps=10
+
+graphique 7 : delta =125, drcit=22.53, heps= 0.003, dt idem, Nt = 100 000, Neps=20
+graphique 8 : delta =125, drcit=22.54, heps= 0.003, dt idem, Nt = 100 000, Neps=20
+graphique 6 : delta =125, drcit=22.51, heps= 0.001, dt idem, Nt = 100 000, Neps=50
