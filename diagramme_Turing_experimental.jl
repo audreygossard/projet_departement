@@ -5,7 +5,7 @@ a = 0.2
 b = 1.3
 Nx = 30
 dx = 1/Nx
-Nt = 3000
+Nt = 40000
 dt = 0.001
 
 X = [i*dx for i = 1:Nx]
@@ -93,18 +93,18 @@ function resout_euler(delta, d, c0, stock0)
     return (u,v)
 end
 
+"""
+d = 1000000
+u,v = resout_euler(50,d,c0,stock0)
+println(stabilite(u[Nt,:], v[Nt,:], 0.05))
+"""
+
 c0,stock0 = conditions_initiales_alea()
-
-
-tab_d = zeros(100)
-tab_delta = zeros(100)
+tab_d = collect(18:0.2:35)
+tab_delta = collect(20:5:350)
 d_stables = []
 delta_stables = []
 
-for i=1:100
-    tab_d[i] = i
-    tab_delta[i] = i*4
-end
 
 for d in tab_d
     for delta in tab_delta
@@ -121,4 +121,4 @@ plt.plot(d_stables,delta_stables, marker = "s", linestyle = "None", label = "sol
 xlabel("d")
 ylabel("delta")
 legend()
-plt.savefig("diagrammes_turing_exp.png", dpi = 300)
+plt.savefig("diagrammes_turing_exp2.png", dpi = 300)
