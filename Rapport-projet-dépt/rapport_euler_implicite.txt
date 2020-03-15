@@ -1,0 +1,69 @@
+\documentclass{report}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath, amsfonts, amssymb} 
+
+\begin{document}
+
+\section{R\'esolution par la m\'ethode d'Euler implicite}\\
+On d\'efinit tout d'abord les diff\'erentes variables dont on a besoin pour d\'ecrire les \'equations du sch\'ema d'Euler implicite : \\
+\begin{itemize}
+\item On fixe comme param\`etres $a = 0.2$ et $b = 1.3$ pour satisfaire les conditions $(a+b)^3>b-a$} et $b>a$.\\
+
+\item On appelle $N_x$ le nombre d'it\'erations sur la variable d'espace, avec $x$ variant entre 0 et 1, on a donc $dx = \frac{1}{N_x}$. On a pris ici $N_x = 30$.\\
+
+\item On garde la notation $c = \begin{pmatrix} u \\ v \end{pmatrix}$, qui sera de taille $2 N_x$.\\
+
+\item Le pas de temps doit \^etre assez petit, $dt = 10^{-3}$ suffit, en dessous, le sch\'ema diverge. On prend de plus une plage de temps suffisamment grande pour que les modes puissent appara\^itre, par exemple $N_t = 50 000$, voire plus si n\'ecessaire.\\
+
+\item Dans une variable $stock$ (tableau de taille $(N_t,2N_x)$)sont stock\'ees toutes les valeurs de $u$ et $v$\\
+\end{itemize}\\
+
+Initialisation : \\
+On se place autour de la solution d'\'equilibre, calcul\'ee comme \'etant $u_{eq} = a+b$ et $v_{eq} = \frac{b}{(a+b)^2}$, en ajoutant un nombre al\'eatoire compris entre $-10^{-4}$ et $10^{-4}$.
+\\
+Matrices :\\
+Nous avons besoin de l'op\'erateur Laplacien discret dont la matrice, de taille  $(N_x, N_x)$, s'\'ecrit  : \\
+\begin{displaymath}
+Lp = \frac{1}{dx^2} \begin{pmatrix} 
+-2     & 1     & 0      & \cdots & 1\\
+ 1     & -2    & \ddots & \ddots & \vdots\\
+ 0     &\ddots & \ddots & \ddots & 0\\
+\vdots & \ddots& \ddots & \ddots & 1\\
+1      &\cdots & 0      &    1   & -2
+\end{pmatrix}
+\end{displaymath}\\
+
+Ce qui donne, \'ecrite par blocs ($1^{er}$ bloc appliqu\'e \`a $u$, le $2^{nd}$ \`a $v$):\\
+\begin{displaymath}
+A = \begin{pmatrix} 
+Lp  & 0 \\
+ 0  & Lp
+\end{pmatrix}
+\end{displaymath}\\
+
+Il nous faut \'egalement la matrice de diffusion, qui s'\'ecrit simplement par blocs, pour un coefficient de diffusion $d$ et en notant $I$ la matrice identit\'e de dimensions $(N_x, N_x)$ :\\
+\begin{displaymath}
+D = \begin{pmatrix} 
+I  & 0 \\
+ 0  & dI
+\end{pmatrix}
+\end{displaymath}\\
+
+Si on note $c^n = \begin{pmatrix} u^n \\ v^n \end{pmatrix}$ le vecteur $c$ \`a l'instant $t_n = n dt$, le sch\'ema d'Euler implicite s'\'ecrit :\\
+\begin{equation}
+c^{n+1} = c^n + dt (DA c^{n+1} + \delta f(c^{n+1}))
+\end{equation}\\
+
+On utilise ici un sch\'ema d'Euler simplifi\'e dans le sens o\`u on remplace $f(c^{n+1})$ par simplement $f(c^n)$. On obtient ainsi :\\
+\begin{align}
+c^{n+1} = c^n + dt (DA c^{n+1} + \delta f(c^n)) \nonumber\\
+\nonumber \\
+c^{n+1} = (I + dt DA)^{-1} (c^n + dt \delta f(c^n))
+\end{align}
+
+
+
+\end{document}

@@ -4,7 +4,7 @@ using PyPlot
 a = 0.2
 b = 1.3
 delta = 175
-d = 35
+d = 24.61
 
 Nx = 30
 dt = 0.001
@@ -32,7 +32,7 @@ I = zeros(2 * Nx, 2 * Nx)   #matrice identié
 for i = 1:2*Nx
     D[i, i] = 1
     I[i,i] = 1
-    if (i >= Nx)
+    if (i > Nx)
         D[i, i] = d
     end
 end
