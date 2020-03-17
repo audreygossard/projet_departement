@@ -1,0 +1,139 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[T1]{fontenc}     
+\usepackage[utf8]{inputenc}   % Accents codés dans la fonte
+\usepackage[frenchb]{babel}  % Les traductions françaises
+\usepackage{numprint}          % \numprint(9,36) pour utilisation de la virgule comme séparateur décimal
+\usepackage{amsmath}         % Les maths de base
+
+
+\usepackage{graphicx}        % Gestion des inclusions graphiques
+\usepackage{pstricks-add}
+\usepackage{tikz}
+
+% Un raccourci pour composer les unités en caractères droits dans les formules mathématiques
+\newcommand{\U}[1]{~\mathrm{#1}}
+
+% Présentation de l'abstract pour la problématique
+\usepackage[runin]{abstract}
+
+% LES TRUCS QUE J'AI RAJOUTES:
+\usepackage{amsfonts}
+\usepackage{float}
+
+
+% Un environnement pour la problématique
+\newenvironment{problematique}{
+\renewcommand{\abstractname}{Problématique}
+\begin{abstract}
+}{
+\end{abstract}
+}
+
+
+% Titre et auteurs du document
+\title{Rapport de projet département}
+\author{Audrey Gossard, Louise Hurel, Cyril Nederveen, Dana Zilberberg}
+\date{}
+
+
+\textheight=25cm
+\textwidth=19cm
+\topmargin=-27pt
+\hoffset=0.cm
+\oddsidemargin=-1.54cm
+\evensidemargin=-1.54cm
+\marginparwidth=0cm
+\marginparsep=0cm
+\headheight=0pt
+\headsep=0pt
+\parindent=0pt
+
+
+\begin{document}
+
+\maketitle
+
+\begin{problematique}
+
+\end{problematique}
+
+
+\section{Résolution par la méthode d'Euler implicite}
+
+\subsection{Comparaison avec le diagramme de Turing théorique}
+% ----------------- A RAJOUTER A LA FIN DE LA PARTIE DE DANA (EULER) ------------------
+Maintenant que l'on a une méthode numérique pour résoudre l'équation, on va pouvoir comparer la stabilité de la solution d'équilibre pour des valeurs de $\delta$ et $d$ avec les résultats prédits par le diagramme de Turing théorique tracé à la section précédente. On sait que l'unique solution d'équilibre est $c_{eq} = (u_{eq},v_{eq}) = (a + b, \frac{b}{(a+b)^{2}})$. Une fois les paramètres fixés, on résout l'équation avec la méthode d'Euler sur une plage de temps suffisante pour que la solution se stabilise, puis on compare la solution au temps final avec la solution homogène en espace $c_{eq}$. Comme précédemment, on fait des boucles sur $\delta$ et $d$ et on trace un diagramme de stabilité. On trouve le résultat suivant (avec la zone stable en bleu), que l'on superpose avec le diagramme de Turing théorique :
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.8]{"superposition_diagrammes_turing.png"}
+\caption{Superposition des diagrammes de Turing théorique et expérimental}
+\end{center}
+\end{figure}
+
+On remarque que les deux diagrammes coïncident pour les modes 2 et 4, mais au niveau des modes 1 et 3, la résolution numérique donne une solution stable alors qu'elle ne devrait pas l'être. Cela peut être dû à des discrétisations trop grossières, ou un temps de résolution trop réduit, mais les temps de calcul déjà très importants ne permettent pas d'augmenter la précision du modèle.
+
+
+\newpage
+
+
+\section{Diagrammes de Turing}
+
+On a montré que la solution d'équilibre de l'équation qui découle du modèle de Schnakenberg est la suivante :
+\begin{equation}
+\begin{split}
+    u_{eq} & = a + b \\
+    v_{eq} & = \frac{b}{(a+b)^{2}}
+\end{split}
+\end{equation}
+On se place dans le cas $(a+b)^{3} > b-a$, la solution en l'absence de diffusion est donc stable. On s'intéresse à la stabilité de (1).
+Afin de linéariser l'équation, on pose $z = c - c_{eq}$ avec $c = (u,v)$ et $c_{eq} = (u_{eq},v_{eq})$ . Pour z proche du vecteur nul, on fait l'approximation $f(z+c_{eq}) = f(c_{eq}) + J_{f}(c_{eq})z = J_{f}(c_{eq})z $, on obtient donc l'équation suivante :
+\begin{equation}
+    \frac{dz}{dt} = D\Delta z + \delta J_{f}(c_{eq})z
+\end{equation}
+
+On décompose alors z en mode de Fourier (à chaque instant t):
+\begin{equation}
+    \forall \  t\geq 0 ,\ x \in [0,1], \quad  z(x,t) = \sum_{n=0}^{\infty} s_{n}(t)e_{n}(x)
+\end{equation}
+avec $e_{n}(x) = \cos(n \pi x)$, et $(e_{n})_{n \in \mathbb{N}}$ formant une base hilbertienne de notre espace de fonction $C^{0}([0,1])$. Les $e_{n}$ sont les fonctions propres de $\Delta$, de valeur propre $-(n\pi)^{2}$. D'où $\Delta s_{n}(t) e_{n}(x) = -(n \pi)^{2} s_{n}(t) e_{n}(x)$. De plus, en utilisant l'unicité de la décomposition dans la base des $(e_{n})_{n \in \mathbb{N}}$, on obtient alors :
+\begin{equation}
+\begin{split}
+    \forall n \in \mathbb{N}, \quad \frac{d s_{n}}{dt} & = -(n \pi)^{2}D s_{n} + \delta J_{f}(c_{eq}) s_{n} \\
+    & = B_{n} s_{n}
+\end{split}
+\end{equation}
+
+On a vu dans la section 1 que la solution d'équilibre de cette équation est stable si et seulement si $tr(B_{n}) < 0$ et $det(B_{n}) > 0$. Or ici, $tr(B_{n})  = -(n \pi)^{2}(1+d) + \frac{\delta}{a+b} (b-a-(a+b)^{3})$. Le premier terme de la somme est négatif, le deuxième l'est aussi car on a supposé $(a+b)^{3} > b-a$. Donc la trace est toujours négative.
+Etant donné des valeurs de $\delta$ et de $d$, il suffit de calculer le déterminant de $B_{n}$ pour savoir si un mode n est stable. \\ \\
+Pour toute la suite, on fixe $a = 0.2$ et $b = 1.3$. On code un programme qui effectue des boucles sur $\delta$ et $d$ et teste la stabilité de la solution d'équilibre pour différents modes n. On obtient alors le diagramme suivant, dit "Diagramme de Turing" :
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.8]{"diagrammes_turing_bis2.png"}
+\caption{Diagramme de Turing pour les modes 1 à 5}
+\end{center}
+\end{figure}
+
+Lorsque les valeurs de $\delta$ et $d$ se trouvent à gauche de la courbe, alors la solution pour le mode en question est stable. Sinon elle est instable. On n'a pas tracé le mode $n=0$ car celui-ci est toujours stable (il correspond à la solution en l'absence de diffusion). Lorsque n est très grand, le terme de diffusion est prépondérant, et on a alors l'équation :
+\begin{equation}
+    \frac{ds_{n}}{dt} = -D(n\pi)^{2}s_{n}
+\end{equation}
+La solution d'équilibre de cette équation est elle-aussi toujours stable, ce qui est cohérent avec le graphique puisque les courbes "montent" lorsque n augmente. \\ \\
+De plus, on observe que quelque soit le mode, les courbes atteignent toutes une valeur de d minimum que l'on va appeler $d_{critique}$.
+
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.8]{"diagrammes_turing_bis_avec_d_crit.png"}
+\caption{Diagramme de Turing pour les modes 1 à 5}
+\end{center}
+\end{figure}
+
+Pour $d<d_{critique}$, alors tous les modes sont tous stables. La solution d'équilibre est donc totalement stable. \\ \\
+Grâce à ce diagramme, étant données des valeurs de $\delta$ et $d$, on va pouvoir prédire quel mode va diverger, et quel mode sera stable.
+
+
+
+
+\end{document}
