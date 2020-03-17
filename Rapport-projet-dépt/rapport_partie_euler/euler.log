@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7050) (preloaded format=pdflatex 2019.7.16)  16 MAR 2020 16:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7050) (preloaded format=pdflatex 2019.7.16)  17 MAR 2020 21:47
 entering extended mode
 **./euler.tex
 (euler.tex
@@ -546,11 +546,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 81--82
  []
 
 [2]
-<diagrammes_turing20-120.png, id=23, 561.297pt x 436.029pt>
-File: diagrammes_turing20-120.png Graphic file (type png)
-<use diagrammes_turing20-120.png>
-Package pdftex.def Info: diagrammes_turing20-120.png  used on input line 85.
-(pdftex.def)             Requested size: 140.3239pt x 109.00697pt.
+<diagrammes_turing20-120_bis.png, id=23, 462.528pt x 346.896pt>
+File: diagrammes_turing20-120_bis.png Graphic file (type png)
+<use diagrammes_turing20-120_bis.png>
+Package pdftex.def Info: diagrammes_turing20-120_bis.png  used on input line 85
+.
+(pdftex.def)             Requested size: 115.63171pt x 86.72379pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 83--89
 
@@ -579,11 +580,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 98--99
 
  []
 
-<diagrammes_turing100-400.png, id=25, 580.569pt x 467.346pt>
-File: diagrammes_turing100-400.png Graphic file (type png)
-<use diagrammes_turing100-400.png>
-Package pdftex.def Info: diagrammes_turing100-400.png  used on input line 101.
-(pdftex.def)             Requested size: 145.14189pt x 116.83621pt.
+<diagrammes_turing100-400_bis.png, id=25, 462.528pt x 346.896pt>
+File: diagrammes_turing100-400_bis.png Graphic file (type png)
+<use diagrammes_turing100-400_bis.png>
+Package pdftex.def Info: diagrammes_turing100-400_bis.png  used on input line 1
+01.
+(pdftex.def)             Requested size: 115.63171pt x 86.72379pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -613,11 +615,12 @@ Package pdftex.def Info: d100delta400_1.png  used on input line 112.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<diagrammes_turing30-400.png, id=28, 554.07pt x 404.712pt>
-File: diagrammes_turing30-400.png Graphic file (type png)
-<use diagrammes_turing30-400.png>
-Package pdftex.def Info: diagrammes_turing30-400.png  used on input line 120.
-(pdftex.def)             Requested size: 138.51715pt x 101.17775pt.
+<diagrammes_turing30-400_bis.png, id=28, 462.528pt x 346.896pt>
+File: diagrammes_turing30-400_bis.png Graphic file (type png)
+<use diagrammes_turing30-400_bis.png>
+Package pdftex.def Info: diagrammes_turing30-400_bis.png  used on input line 12
+0.
+(pdftex.def)             Requested size: 115.63171pt x 86.72379pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -647,11 +650,12 @@ Package pdftex.def Info: d30delta400_1.png  used on input line 131.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<diagrammes_turing26-500.png, id=31, 566.115pt x 421.575pt>
-File: diagrammes_turing26-500.png Graphic file (type png)
-<use diagrammes_turing26-500.png>
-Package pdftex.def Info: diagrammes_turing26-500.png  used on input line 139.
-(pdftex.def)             Requested size: 141.5284pt x 105.39348pt.
+<diagrammes_turing26-500_bis.png, id=31, 462.528pt x 346.896pt>
+File: diagrammes_turing26-500_bis.png Graphic file (type png)
+<use diagrammes_turing26-500_bis.png>
+Package pdftex.def Info: diagrammes_turing26-500_bis.png  used on input line 13
+9.
+(pdftex.def)             Requested size: 115.63171pt x 86.72379pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -707,19 +711,19 @@ Package pdftex.def Info: dcrit100.png  used on input line 161.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[3 <./diagrammes_turing20-120.png> <./d30delta120.png>] [4 <./diagrammes_turing
-100-400.png> <./d100delta400.png> <./d100delta400_1.png> <./diagrammes_turing30
--400.png> <./d30delta450.png> <./d30delta400_1.png>] [5 <./diagrammes_turing26-
-500.png> <./d26delta500.png>] [6 <./dcrit5.png> <./dcrit40.png> <./dcrit100.png
->] (euler.aux)
+[3 <./diagrammes_turing20-120_bis.png> <./d30delta120.png>] [4 <./diagrammes_tu
+ring100-400_bis.png> <./d100delta400.png> <./d100delta400_1.png> <./diagrammes_
+turing30-400_bis.png> <./d30delta450.png> <./d30delta400_1.png>] [5 <./diagramm
+es_turing26-500_bis.png> <./d26delta500.png>] [6 <./dcrit5.png> <./dcrit40.png>
+ <./dcrit100.png>] (euler.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
  4958 strings out of 492895
- 76267 string characters out of 3124202
- 151510 words of memory out of 3000000
+ 76329 string characters out of 3124202
+ 151519 words of memory out of 3000000
  8782 multiletter control sequences out of 15000+200000
  27483 words of font info for 34 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -742,7 +746,7 @@ onts/type1/public/lm/lmmi7.pfb><C:/Users/Amos/AppData/Local/Programs/MiKTeX 2.9
 2.9/fonts/type1/public/lm/lmr7.pfb><C:/Users/Amos/AppData/Local/Programs/MiKTeX
  2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Amos/AppData/Local/Programs/MiK
 TeX 2.9/fonts/type1/public/lm/lmsy7.pfb>
-Output written on euler.pdf (6 pages, 1360514 bytes).
+Output written on euler.pdf (6 pages, 1081668 bytes).
 PDF statistics:
  103 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

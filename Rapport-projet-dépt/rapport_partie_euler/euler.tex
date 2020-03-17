@@ -70,7 +70,7 @@ On utilise ici un sch\'ema d'Euler simplifi\'e dans le sens o\`u on remplace $f(
 \begin{align}
 c^{n+1} = c^n + dt (DA c^{n+1} + \delta f(c^n)) \nonumber\\
 \nonumber \\
-c^{n+1} = (I + dt DA)^{-1} (c^n + dt \delta f(c^n))
+c^{n+1} = (I - dt DA)^{-1} (c^n + dt \delta f(c^n))
 \end{align}\\
 
 On it\`ere ainsi ce sch\'ema $N_t$ fois, et \`a chaque it\'eration, on stock le r\'esultat en remplissant la $n^{i\`eme}$ ligne de la matrice $stock$:\\
