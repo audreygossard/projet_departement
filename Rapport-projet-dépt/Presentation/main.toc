@@ -1,0 +1,8 @@
+\babel@toc {english}{}
+\beamer@sectionintoc {1}{Introduction}{2}{0}{1}
+\beamer@sectionintoc {2}{Some \LaTeX {} Examples}{3}{0}{2}
+\beamer@subsectionintoc {2}{1}{Tables and Figures}{3}{0}{2}
+\beamer@subsectionintoc {2}{2}{Mathematics}{4}{0}{2}
+\beamer@subsectionintoc {2}{3}{Modélisation de la morphogenèse par des équations de réaction-diffusion}{5}{0}{2}
+\beamer@subsectionintoc {2}{4}{Diagramme de Turing}{7}{0}{2}
+\beamer@subsectionintoc {2}{5}{Résolution par la méthode d’Euler implicite}{10}{0}{2}

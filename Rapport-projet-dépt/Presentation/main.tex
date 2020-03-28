@@ -17,6 +17,9 @@
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{chemist}
+\usepackage[version=4]{mhchem}
+\usepackage{fancybox}
 
 \title[Your Short Title]{Projet de département  : Formation de patterns dans les systèmes de réaction-diffusion}
 \author{Cyril NEDERVEEN\\
@@ -93,6 +96,145 @@ Let $X_1, X_2, \ldots, X_n$ be a sequence of independent and identically distrib
 denote their mean. Then as $n$ approaches infinity, the random variables $\sqrt{n}(S_n - \mu)$ converge in distribution to a normal $\mathcal{N}(0, \sigma^2)$.
 
 \end{frame}
+
+
+
+\subsection{Modélisation de la morphogenèse par des équations de réaction-diffusion}
+
+\begin{frame}{Modélisation de la morphogenèse par des équations de réaction-diffusion}
+
+\begin{columns}
+\column{0.5\textwidth}
+\underline{Modèle de Schnakenberg :} \\ \medskip
+Réaction des espèces X et Y dans milieu avec A et B
+    \begin{center}
+    \begin{chemmath}
+    \begin{split}
+        X & \ce{ <=>[k_{1}][k_{-1}] A} \\
+        \ce{B & ->[k_{2}][ ] Y} \\
+          \ce{2X + Y & ->[k_{3}] 3X}
+    \end{split}
+    \end{chemmath}
+    \end{center}
+\column{0.5\textwidth}
+\underline{Equation obtenue :} \\ \medskip
+$u$ et $v$ = concentrations X et Y (normalisées) \\
+$d$ et $\delta$ = paramètres
+
+\medskip
+
+\fboxsep=3pt
+\fboxrule=1.7pt
+\def\bordercolor{purple}
+\def\backgroundcolor{white}
+\cornersize{0.9}
+\fcolorbox{\bordercolor}{\backgroundcolor} {$
+        \frac{\partial c}{\partial t} = D \Delta c + \delta f(c)
+    $}
+\smallskip
+
+    avec c = \begin{pmatrix} u \\ v \end{pmatrix},
+    D = \begin{pmatrix} 
+        1  & 0 \\
+        0  & d
+          \end{pmatrix}
+    et f(c) = \begin{pmatrix} a - u + vu^{2} \\ b-vu^{2} \end{pmatrix}.
+\end{columns}
+
+\end{frame}
+
+
+
+\begin{frame}{Modélisation de la morphogenèse par des équations de réaction-diffusion}
+
+\textbf{\underline{Résolution sans terme de diffusion}}
+\begin{equation}
+\frac{\partial c}{\partial t} = \delta f(c)
+\end{equation}
+
+Solution d'équilibre : 
+\begin{cases} $u_{eq} = a+b$ \\
+              $v_{eq} = \frac{b}{(a+b)^{2}}$
+\end{cases}
+\\ \bigskip
+Solution d'équilibre \textbf{stable} $\Longleftrightarrow$ $b-a<(a+b)^{3}$.
+
+\end{frame}
+
+\subsection{Diagramme de Turing}
+
+\begin{frame}{Diagramme de Turing}
+
+\begin{itemize}
+    \item \underline{linéarisation:} $z = c - c_{eq}$ \quad $f(c) = J_{f}(c_{eq})z$
+    $$
+    \Rightarrow \frac{dz}{dt} = D\Delta z + \delta J_{f}(c_{eq})z
+    $$
+    \item \underline{modes de Fourier:}
+    $$
+    z(x,t) = \sum\limits_{n=0}^{\infty}s_{n}(t) e_{n}(x) \quad (e_{n}(x) = cos(n \pi x))
+    $$
+    \item \underline{vecteur propre:} $\Delta e_{n}(x) = -(n\pi)^{2} e_{n}(x)$
+    $$\Rightarrow \frac{ds_{n}}{dt} = (-(n\pi)^{2}D + \delta J_{f}(c_{eq}))s_{n} $$
+    \item \textbf{CNS mode stable} \\
+    \medskip
+    \fboxsep=3pt
+    \fboxrule=1.7pt
+    \def\bordercolor{purple}
+    \def\backgroundcolor{white}
+    \cornersize{0.9}
+    \fcolorbox{\bordercolor}{\backgroundcolor} {$tr(-(n\pi)^{2}D + \delta J_{f}(c_{eq})) < 0$ et $det(-(n\pi)^{2}D + \delta J_{f}(c_{eq})) > 0$}
+    
+    
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Diagramme de Turing}
+    \underline{Premier affichage du diagramme de Turing:}
+    
+    \begin{columns}
+
+    \begin{column}{250}
+    \begin{figure}
+    \includegraphics[width=220]{diagrammes_turing3_1.png}
+    \caption{\label{diagramme_turing_1}{Diagramme de Turing}}
+    \end{figure}
+    \end{column}
+    
+    \begin{column}{2.7cm}
+    On parcourt une grille de $\delta$ et $d$, on teste la stabilité de plusieurs modes (ici de 0 à 2). Lorsque la case est colorée, le mode de cette couleur est stable.
+    
+    \end{column}
+    \end{columns}
+    
+    
+\end{frame}
+
+\begin{frame}{Diagramme de Turing}
+    \underline{Amélioration de l'affichage du diagramme de Turing:}
+    
+    \begin{columns}
+
+    \begin{column}{250}
+    \begin{figure}
+    \includegraphics[width=220]{diagrammes_turing_bis_avec_d_crit.png}
+    \caption{\label{diagramme_turing_2}{Diagramme de Turing amélioré (modes 1 à 5)}}
+    \end{figure}
+    \end{column}
+    
+    \begin{column}{2.7cm}
+    On observe un $d_{critique}$ qui semble indépendant de $\delta$ en dessous duquel tous les modes sont stables. \\
+    Ligne = frontière de stabilité (gauche stable, droite instable)
+    
+    \end{column}
+    \end{columns}
+    
+    
+\end{frame}
+
+
+
 
 \subsection{Résolution par la méthode d’Euler implicite}
 
@@ -208,6 +350,35 @@ Plus on est proche de $d_{critique}$, plus la convergence apparaît tardivement 
 \caption{\label{fig:graph4} $d = 23.1$, convergence après 50 secondes}
 \end{figure}
 \end{frame}
+
+
+
+\begin{frame}{Diagramme de Turing expérimental}
+Diagramme de Turing expérimental tracé grâce à méthode de résolution:
+\begin{itemize}
+    \item conditions initiales perturbées (proche de l'équilibre)
+    \item stabilisation pendant grand temps
+    \item comparaison avec solution d'équilibre -> stabilité ou non
+\end{itemize}
+\begin{figure}
+\includegraphics[width=0.45\textwidth]{diagrammes_turing_exp4.png}
+\caption{En bleu: solution stable}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Comparaison des deux diagrammes}
+On superpose le diagramme précédent et le nouveau diagramme:
+\begin{figure}
+\includegraphics[width=0.65\textwidth]{superposition_diagrammes_turing.png}
+\caption{Superposition des deux diagrammes}
+\end{figure}
+Ils coïncident seulement pour les modes pairs (n=4 et n=2).
+\end{frame}
+
+
+
+
 
 %DEBUT DE LA PARTIE DE CYRIL : L'AMPLITUDE DES MODES INSTABLES
 
