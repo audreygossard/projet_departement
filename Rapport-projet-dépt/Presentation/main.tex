@@ -209,4 +209,133 @@ Plus on est proche de $d_{critique}$, plus la convergence apparaît tardivement 
 \end{figure}
 \end{frame}
 
+%DEBUT DE LA PARTIE DE CYRIL : L'AMPLITUDE DES MODES INSTABLES
+
+\begin{frame}{\'Etude d'un mode instable}
+\textbf{Objectif}\\
+Prédire théoriquement l'allure de la sollution lorsque $\delta=$150 et $d=d_c +\epsilon$ (avec $\epsilon<<1$)
+\begin{figure}
+\begin{subfigure}
+\includegraphics[width=0.4\textwidth]{diagrammes_turing1.png}
+\end{subfigure}
+\begin{subfigure}
+\includegraphics[width=0.4\textwidth]{graph1.png}
+\end{subfigure}
+\caption{\label{fig:graph1}Instabilité du mode 2}
+\end{figure}
+\end{frame}
+
+\begin{frame}{\'Etude d'un mode instable}
+\textbf{Apparition d'une sinuoïde}\\
+Solution en fonction du temps et de l'espace :
+\begin{equation}
+    \forall \  t\geq 0 ,\ x \in [0,1], \quad  z(x,t) = \sum_{n=0}^{\infty} s_{n}(t)e_{n}(x)
+\end{equation}
+Donc : 
+\begin{equation}
+\begin{split}
+    \forall n \in \mathbb{N}, \quad \frac{d s_{n}}{dt} & = -(n \pi)^{2}D s_{n} + \delta J_{f}(c_{eq}) s_{n} \\
+    & = B_{n} s_{n}
+\end{split}
+\end{equation}
+Or pour le choix de $\delta$ et $d$, $s_n \longrightarrow 0$ sauf pour $n=2$ (et $n=0$) car $det(B_2)<0$ ! Cela explique en partie la forme de la solution.
+\end{frame}
+
+\begin{frame}{\'Etude d'un mode instable}
+\textbf{Résolution directe}\\
+Méthode issue de l'article sur la formation des patterns écrit par Antoine Levitt : on développe la solution en série paramètrée par $\xi$
+\begin{equation}
+c(x) = \sum_{n=0}^{\infty} \epsilon^{\xi n} c_n (x)
+\end{equation}
+On injecte dans l'équation : 
+\begin{equation}
+Dc''(x) + f(c)=0
+\end{equation}
+\end{frame}
+
+\begin{frame}{\'Etude d'un mode instable}
+\textbf{Résolution directe}\\
+On rassemble les ordre ensemble (en définissant l'opérateur L): 
+\begin{equation}
+\left\{
+    \begin{array}{ll}
+        \begin{pmatrix}
+        1 & 0\\
+        0 & d_c
+        \end{pmatrix} c_0'' + f(c_0) = 0\ \   pour\ ordre\ 0
+        \\
+        \\
+        \begin{pmatrix}
+        1 & 0\\
+        0 & d_c
+        \end{pmatrix} c_1'' + df(c_0)c_1=Lc_1=0\ \   pour\ ordre\ en\ \xi
+    \end{array}
+\right.
+\end{equation}
+On trouve alors :
+\begin{equation}
+\left\{
+    \begin{array}{ll}
+        c_0 = \begin{pmatrix} u_{eq} \\ v_{eq} \end{pmatrix}
+        \\
+        \\
+        c_1(x) = A cos(jx)e_2
+    \end{array}
+\right.
+\end{equation}
+où $e_2$ est tel que $Vect(e_2)=Ker(B_2)$. Cette forme correspond assez bien à l'étude qualitative. 
+\end{frame}
+
+\begin{frame}{\'Etude d'un mode instable}
+\textbf{Résolution directe}\\
+À cause du terme $d_c + \epsilon$ dans la matrice de diffusion, un terme porté par $\epsilon^{\xi +1}$ apparait : 
+\begin{equation}
+\epsilon^{\xi +1} v_1 ''   \begin{pmatrix}
+        1 \\
+        0 
+        \end{pmatrix} 
+\end{equation}
+Cet ordre ne peut pas être isolé sinon $v_1 ''=0$ ce qui est incompatible avec la forme trouvée de $c_1$. La seule possibilité est que : 
+\begin{equation}
+    \xi+1=n\xi
+\end{equation}
+\end{frame}
+
+\begin{frame}{\'Etude d'un mode instable}
+\textbf{Résolution directe}\\
+Lemme : Alternative de Fredholm\\
+Si L est un opérateur linéaire borné sur $L_2([0,1],\mathbf{R} ^2)$ et $f$ une fonction, une condition d'existence d'une fonction $w$ tel que $Lw=f$ est que $f\in Ker(L)$
+\newline 
+\newline En étudiant la possibilité que n=3 i.e on rassemble les termes en $\epsilon^{3\xi}$, on remarque grâce à l'alternative de Fredholm que c'est la seule possibilité. Ainsi :
+\begin{equation}
+    \xi=\frac{1}{2}
+\end{equation}
+\textbf{Solution approchée}
+\begin{equation}
+c(x)\simeq\overline{c} + A \sqrt{\epsilon} cos(jx)e_2
+\end{equation}
+\textbf{Remarque}\\
+Le résultat ci-dessus est assez satisfaisant étant donné l'allure de la solution numérique.
+\end{frame}
+
+\begin{frame}{\'Etude d'un mode instable}
+\textbf{Tests numérique}\\
+\begin{figure}
+\includegraphics[width=0.7\textwidth]{ampli.png}
+\caption{\label{fig:graph4} pseudo-amplitude en fonction de $\epsilon$ et courbe de tendance}
+\end{figure}
+Les points sont plus dispersés autour du point d'inflexion en raison de la remarque faite plus tôt i.e 
+\end{frame}
+
+\begin{frame}{\'Etude d'un mode instable}
+\textbf{Remarques sur la simulation}\\
+\begin{itemize}
+    \item La courbe est volontairement décalée pour pouvoir constater le changement de comportement asymptotique lorsqu'on franchit $d_c$. On peut d'ailleurs donner une valeur plus précise de $d_c$ à l'aide de ce test : $d_c\simeq 22,47$
+    \item Les points sont plus dispersés autour du point d'inflexion en raison de la remarque faite plus tôt i.e plus on s'approche de $d_c$, plus la convergence est tardive. Ainsi il aurait fallu des temps très longs et la machine le supportait mal.
+    \item La tendance n'est pas exactement une fonction racine, mais proche de $d_c$ on remarque quand même une pente qui semble bien redressée. Cette caractéristique va tout de même dans le sens de l'approximation de $c$ trouvée.
+\end{itemize}
+\end{frame}
+
+%FIN DE LA PARTIE DE CYRIL
+
 \end{document}
